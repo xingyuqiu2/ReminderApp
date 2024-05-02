@@ -1,1 +1,2 @@
 day1: Implement the Recurrence class
+day2: Implement the DateTimeWrapper class, edit the Recurrence class accordingly, write tests for both classes
