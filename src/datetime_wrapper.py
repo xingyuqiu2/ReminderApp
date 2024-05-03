@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing_extensions import Self
 from typing import Tuple
 
@@ -12,6 +12,24 @@ class DateTimeWrapper:
     
     def __repr__(self) -> str:
         return self.datetime_string
+
+    def __eq__(self, other):
+        if isinstance(other, DateTimeWrapper):
+            return self.my_datetime == other.my_datetime
+        else:
+            raise TypeError("Unsupported operand type. Can only compare DateTimeWrapper objects.")
+    
+    def __lt__(self, other: Self) -> bool:
+        if isinstance(other, DateTimeWrapper):
+            return self.my_datetime < other.my_datetime
+        else:
+            raise TypeError("Unsupported operand type. Can only compare DateTimeWrapper objects.")
+    
+    def __gt__(self, other: Self) -> bool:
+        if isinstance(other, DateTimeWrapper):
+            return self.my_datetime > other.my_datetime
+        else:
+            raise TypeError("Unsupported operand type. Can only compare DateTimeWrapper objects.")
     
     def get_diff_days_hours_minutes(self, other: Self) -> Tuple[int, int, int]:
         if self.my_datetime > other.my_datetime:
@@ -19,6 +37,15 @@ class DateTimeWrapper:
         else:
             td = other.my_datetime - self.my_datetime
         return td.days, td.seconds//3600, (td.seconds//60)%60
+    
+    def get_diff_weeks(self, other: Self) -> int:
+        if self.my_datetime > other.my_datetime:
+            later_start_dt = self.my_datetime.date() - timedelta(days=self.weekday if self.weekday != 7 else 0)
+            former_start_dt = other.my_datetime.date() - timedelta(days=other.weekday if other.weekday != 7 else 0)
+        else:
+            later_start_dt = other.my_datetime.date() - timedelta(days=other.weekday if other.weekday != 7 else 0)
+            former_start_dt = self.my_datetime.date() - timedelta(days=self.weekday if self.weekday != 7 else 0)
+        return (later_start_dt - former_start_dt).days // 7
     
     @property
     def year(self) -> int:

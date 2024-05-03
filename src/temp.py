@@ -14,3 +14,4 @@ print((td.seconds//60)%60)
 
 print(DateTimeWrapper(2023, 12, 31, 23, 59).week)
 print(DateTimeWrapper(2023, 12, 31, 23, 59).weekday)
+print(DateTimeWrapper(2022, 3, 1, 9, 30) == DateTimeWrapper(2022, 3, 1, 9, 30))

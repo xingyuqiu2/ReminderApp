@@ -1,2 +1,3 @@
 day1: Implement the Recurrence class
 day2: Implement the DateTimeWrapper class, edit the Recurrence class accordingly, write tests for both classes
+day3: Fix the should_recur method in the Recurrence class, edit the DateTimeWrapper class, add more tests for DateTimeWrapper class and Recurrence class
