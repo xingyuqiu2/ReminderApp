@@ -32,3 +32,9 @@ d = datetime(2020, 1, 1, 10, 30)
 d += timedelta(minutes=-1)
 print(d)
 print(datetime(2020, 1, 1, 10, 29) < datetime(2020, 1, 1, 10, 30))
+
+list = None
+list_int_str = ','.join(map(str, list or []))
+print(list_int_str)
+list_int = [int(x) for x in list_int_str.split(',')] if list_int_str else []
+print(list_int)

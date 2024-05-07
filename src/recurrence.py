@@ -39,6 +39,15 @@ class Recurrence(ABC):
 
     def is_finished(self):
         return self.finished
+    
+    # @property
+    # def next_recur_dt_wrapper(self) -> DateTimeWrapper:
+    #     return self.next_recur_dt_wrapper
+    
+    # @next_recur_dt_wrapper.setter
+    # def next_recur_dt_wrapper(self, dt_wrapper: DateTimeWrapper) -> None:
+    #     self.next_recur_dt_wrapper = dt_wrapper
+
 
 class Once(Recurrence):
     """
