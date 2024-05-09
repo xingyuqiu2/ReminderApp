@@ -1,6 +1,6 @@
 from recurrence import Recurrence, CLASS_NAME_TO_CONSTRUCTOR
 from datetime_wrapper import DateTimeWrapper
-from typing import Dict, List
+from typing import Dict, List, Tuple
 from typing_extensions import Self
 from uuid import uuid4
 from db import DB
@@ -73,7 +73,7 @@ class ReminderManager:
         self.__fetch_reminders_data_from_db()
         atexit.register(self.on_exit)
 
-    def add_reminder(self, title: str, message: str, recurrence_type: str, start_dt_wrapper: DateTimeWrapper, end_dt_wrapper: DateTimeWrapper = None, next_recur_dt_wrapper: DateTimeWrapper = None, interval: int = 1, list: List[int] = None) -> None:
+    def add_reminder(self, title: str, message: str, recurrence_type: str, start_dt_wrapper: DateTimeWrapper, end_dt_wrapper: DateTimeWrapper = None, next_recur_dt_wrapper: DateTimeWrapper = None, interval: int = 1, list: List[int] = None) -> str:
         reminder_id = str(uuid4())
         reminder = Reminder(
             reminder_id,
@@ -89,6 +89,7 @@ class ReminderManager:
         self.reminders[reminder_id] = reminder
         self.reminders = dict(sorted(self.reminders.items(), key=lambda item: item[1]))
         self.db.add_reminder(reminder_id, title, message, recurrence_type, start_dt_wrapper, end_dt_wrapper, next_recur_dt_wrapper, interval, list)
+        return reminder_id
 
     def remove_reminder(self, reminder_id: str) -> None:
         del self.reminders[reminder_id]
@@ -172,6 +173,12 @@ class ReminderManager:
         print("Stored Reminders: ")
         for reminder_id, reminder in self.reminders.items():
             print(reminder_id, reminder)
+    
+    def get_all_reminders(self) -> List[Tuple]:
+        res = []
+        for reminder_id, reminder in self.reminders.items():
+            res.append((reminder_id, reminder.title, reminder.message, reminder.next_recur_dt_wrapper))
+        return res
 
     def on_exit(self):
         self.show_all_reminders()

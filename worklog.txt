@@ -2,7 +2,7 @@ day1: Implement the Recurrence class
 day2: Implement the DateTimeWrapper class, edit the Recurrence class accordingly, write tests for both classes
 day3: Fix the should_recur method in the Recurrence class, edit the DateTimeWrapper class, add more tests for DateTimeWrapper class and Recurrence class
 day4: Change the logic of should_recur method in the Recurrence class by adding the next recurrence time, add Reminder class and reminderManager class
-day5: write methods in ReminderManager class and DB class to add, remove, update reminders information
-
+day5: Write methods in ReminderManager class and DB class to add, remove, update reminders information
+day6: Implement the GUI for the reminder app that supports showing, adding and removing of simple reminders
 
 
